@@ -1,8 +1,8 @@
-name: Deploy EC2
+name: Deploy a EC2
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -20,11 +20,9 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > key.pem
           chmod 600 key.pem
-      
+
           ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST '
-            cd /var/www/ariketa3/daw-2526-CI-ariketa3/src && \
-            git fetch origin main && \
-            git reset --hard origin/main && \
+            cd /var/www/ariketa3 && \
+            git pull origin main && \
             echo "✅ Despliegue completado correctamente."
           '
-
